@@ -18,10 +18,10 @@ services:
     env_file:
       - .env
     depends_on:
-      migrations:
-        condition: service_completed_successfully
       db:
         condition: service_healthy
+      migrations:
+        condition: service_completed_successfully
     volumes:
       - ./.env:/app/.env
 
