@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: clone code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: docker build
         run: docker build -t samshm91/todolist:$GITHUB_REF_NAME-$GITHUB_RUN_ID .
       - name: docker login
@@ -41,3 +41,13 @@ jobs:
           source: "deploy/docker-compose.yaml"
           target: "todolist"
           strip_components: 1
+      - name: deploy app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          password: ${{ secrets.VM_PASSWORD }}
+          script: |
+              cd todolist
+              docker-compose down
+              docker-compose up -d
