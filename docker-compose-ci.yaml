@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   front:
-    image: sermalenk/skypro-front:lesson-35
+    image: sermalenk/skypro-front:lesson-36
     ports:
       - "80:80"
     depends_on:
@@ -52,7 +52,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5

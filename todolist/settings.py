@@ -45,9 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'goals',
     'core',
     'corsheaders',
     'social_django',
+    'django_filters',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -160,3 +163,10 @@ SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# drf settings
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS' : 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_FILTER_BACKENDS' : ['django_filters.rest_framework.DjangoFilterBackend'],
+}
