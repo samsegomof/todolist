@@ -45,11 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # project apps
     'goals',
     'core',
     'bot',
-    # third-side libraries
     'corsheaders',
     'social_django',
     'django_filters',

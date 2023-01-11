@@ -125,7 +125,7 @@ class TgBot:
             Returns:
                 TgUser или None
         """
-        user_tg, created = TgUser.objects.get_or_create(user_ud=user_ud, chat_id=chat_id)
+        user_tg, created = TgUser.objects.get_or_create(tg_user_id=user_ud, tg_chat_id=chat_id)
 
         ver_cod = generator_code_verification()
 
@@ -143,7 +143,7 @@ class TgBot:
             user_tg.verification_code = ver_cod
             user_tg.save()
             self.tg_client.send_message(
-                chat_id=user_tg.chat_id,
+                chat_id=user_tg.tg_chat_id,
                 text=f'Подтвердите свой аккаунт\n'
                      f'Код верификации - {ver_cod}')
             return False
