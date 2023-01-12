@@ -9,7 +9,7 @@ class TgUserVerCodSerializer(serializers.ModelSerializer):
     class Meta:
         model = TgUser
         fields = '__all__'
-        read_only_fields = ('id', 'chat_id', 'user_ud')
+        read_only_fields = ('id', 'tg_chat_id', 'tg_user_id')
 
     def update(self, instance, validated_data):
         instance = super().update(instance, validated_data)
