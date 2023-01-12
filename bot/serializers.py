@@ -13,5 +13,5 @@ class TgUserVerCodSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         instance = super().update(instance, validated_data)
-        TgClient(token=tg_client).send_message(chat_id=instance.tg_chat_id, text='Успешно')
+        tg_client.send_message(chat_id=instance.tg_chat_id, text='Успешно')
         return instance
