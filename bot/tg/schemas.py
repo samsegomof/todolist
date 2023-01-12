@@ -1,16 +1,19 @@
-from dataclasses import dataclass, field
-from typing import List
+from dataclasses import field
+from typing import List, Optional
 
 import marshmallow
 import marshmallow_dataclass
+from marshmallow_dataclass import dataclass
 
 
 @dataclass
 class MessageFrom:
     id: int
     is_bot: bool
-    first_name: str
-    username: str = ""
+    first_name: Optional[str]
+    last_name: Optional[str]
+    username: str
+    language_code: Optional[str]
 
     class Meta:
         unknown = marshmallow.EXCLUDE
@@ -19,9 +22,20 @@ class MessageFrom:
 @dataclass
 class Chat:
     id: int
-    first_name: str
+    first_name: Optional[str]
+    last_name: Optional[str]
+    username: Optional[str]
     type: str
-    username: str = ""
+
+    class Meta:
+        unknown = marshmallow.EXCLUDE
+
+
+@dataclass
+class Entities:
+    offset: int
+    length: int
+    type: str
 
     class Meta:
         unknown = marshmallow.EXCLUDE
@@ -30,10 +44,29 @@ class Chat:
 @dataclass
 class Message:
     message_id: int
-    date: int
-    text: str
-    from_: MessageFrom = field(metadata={"data_key": "from"})
+    message_from: MessageFrom = field(metadata={"data_key": "from"})
     chat: Chat
+    date: Optional[int]
+    text: Optional[str]
+    entities: Optional[List[Entities]]
+
+    class Meta:
+        unknown = marshmallow.EXCLUDE
+
+
+@dataclass
+class Update:
+    update_id: int
+    message: Message
+
+    class Meta:
+        unknown = marshmallow.EXCLUDE
+
+
+@dataclass
+class GetUpdatesResponse:
+    ok: bool
+    result: List[Update]
 
     class Meta:
         unknown = marshmallow.EXCLUDE
@@ -48,23 +81,5 @@ class SendMessageResponse:
         unknown = marshmallow.EXCLUDE
 
 
-@dataclass
-class UpdateObj:
-    update_id: int
-    message: Message
-
-    class Meta:
-        unknown = marshmallow.EXCLUDE
-
-
-@dataclass
-class GetUpdatesResponse:
-    ok: bool
-    result: List[UpdateObj]
-
-    class Meta:
-        unknown = marshmallow.EXCLUDE
-
-
-get_updates_schema = marshmallow_dataclass.class_schema(GetUpdatesResponse)
-send_message_schema = marshmallow_dataclass.class_schema(SendMessageResponse)
+GET_UPDATES_SCHEMA = marshmallow_dataclass.class_schema(GetUpdatesResponse)
+SEND_MESSAGE_RESPONSE_SCHEMA = marshmallow_dataclass.class_schema(SendMessageResponse)

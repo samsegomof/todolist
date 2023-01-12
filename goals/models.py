@@ -119,3 +119,10 @@ class GoalComment(DatesModelMixin):
             self.created = timezone.now()
         self.updated = timezone.now()
         return super().save(*args, **kwargs)
+
+
+class Status(models.IntegerChoices):
+    to_do = 1, "К выполнению"
+    in_progress = 2, "В процессе"
+    done = 3, "Выполнено"
+    archived = 4, "Архив"

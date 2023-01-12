@@ -3,12 +3,12 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 
 from bot.models import TgUser
-from bot.serializers import TgUserVerCodSerializer
+from bot.serializers import VerifyTgBotSerializer
 
 
 class TgUserUpdate(generics.UpdateAPIView):
     model = TgUser
-    serializer_class = TgUserVerCodSerializer
+    serializer_class = VerifyTgBotSerializer
     permission_classes = (IsAuthenticated,)
     http_method_names = ('patch', )
 
