@@ -159,6 +159,9 @@ class TgBot:
             for item in response.result:
                 self.offset = item.update_id + 1
 
+                if item.message is None:
+                    continue
+
                 user_tg: TgUser | False = self.check_user(user_ud=item.message.from_.id,
                                                           chat_id=item.message.chat.id)
 

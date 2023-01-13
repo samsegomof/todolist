@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Optional
 
 import marshmallow
 import marshmallow_dataclass
@@ -34,6 +34,7 @@ class Message:
     text: str
     from_: MessageFrom = field(metadata={"data_key": "from"})
     chat: Chat
+    username: str = ""
 
     class Meta:
         unknown = marshmallow.EXCLUDE
@@ -42,7 +43,7 @@ class Message:
 @dataclass
 class SendMessageResponse:
     ok: bool
-    result: Message
+    message: Optional[Message]
 
     class Meta:
         unknown = marshmallow.EXCLUDE
@@ -51,7 +52,7 @@ class SendMessageResponse:
 @dataclass
 class UpdateObj:
     update_id: int
-    message: Message
+    message: Optional[Message]
 
     class Meta:
         unknown = marshmallow.EXCLUDE

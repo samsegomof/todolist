@@ -18,7 +18,9 @@ class TgClient:
         """
             Получения входящих обновлений от пользователя.
         """
-        response = requests.get(self.get_url(f"getUpdates?offset={offset}&timeout={timeout}"))
+        response = requests.get(self.get_url(
+            f"getUpdates?offset={offset}&timeout={timeout}&allowed_updates=['message']")
+        )
         json_data = response.json()
         print(json_data)
         result = get_updates_schema().load(json_data)
