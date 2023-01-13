@@ -23,15 +23,29 @@ services:
       migrations:
         condition: service_completed_successfully
 
-  migrations:
+  bot:
     build:
       context: .
-    volumes:
-      - ./.env:/app/.env
+    env_file:
+      - .env
+    restart: always
     depends_on:
       db:
         condition: service_healthy
-    command: python manage.py migrate
+      migrations:
+        condition: service_completed_successfully
+    command: >
+      sh -c "python3 manage.py runbot"
+
+  migrations:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    command: >
+      sh -c "python3 manage.py migrate"
 
   db:
     image: postgres:latest
