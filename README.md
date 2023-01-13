@@ -3,9 +3,9 @@
 ### Описание проекта:
  - Todolist - планировщик задач по работе с целями и возможностью отслеживания прогресса по ним.
 ### Технологии:
- - Django==4.0.1
- - djangorestframework
- - Postgresql
+![version](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![version](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![version](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ---
 ## Запуск проекта:
  - установить зависимости `pip install -r requirements.txt`
