@@ -13,7 +13,7 @@ def test_create(auth_client, new_user, category):
                          'created': response.data.get('created'),
                          'updated': response.data.get('updated'),
                          'title': 'test goal',
-                         'description': 'for_example',
+                         'description': 'testexample',
                          'status': 1,
                          'priority': 2,
                          'due_date': None,

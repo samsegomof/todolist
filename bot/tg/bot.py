@@ -52,7 +52,7 @@ class TgBot:
         categories = GoalCategory.objects.filter(
             board__participants__user=user_tg.user,
             board__participants__role__in=(BoardParticipant.Role.owner, BoardParticipant.Role.writer)
-        ) #.exclude(is_deleted=True)
+        ).exclude(is_deleted=True)
 
         if not categories:
             self.tg_client.send_message(chat_id=user_tg.chat_id, text='Категорий нет')
