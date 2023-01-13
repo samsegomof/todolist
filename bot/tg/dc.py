@@ -1,45 +1,42 @@
-from dataclasses import field
+from dataclasses import dataclass, field
 from typing import List
 
+import marshmallow
 import marshmallow_dataclass
-from marshmallow_dataclass import dataclass
-from marshmallow import EXCLUDE
 
 
 @dataclass
 class MessageFrom:
     id: int
     is_bot: bool
-    first_name: str | None
-    last_name: str | None
-    username: str = ''
+    first_name: str
+    username: str = ""
 
     class Meta:
-        unknown = EXCLUDE
+        unknown = marshmallow.EXCLUDE
 
 
 @dataclass
 class Chat:
     id: int
-    first_name: str | None
-    last_name: str | None
+    first_name: str
     type: str
-    username: str = ''
+    username: str = ""
 
     class Meta:
-        unknown = EXCLUDE
+        unknown = marshmallow.EXCLUDE
 
 
 @dataclass
 class Message:
     message_id: int
     date: int
-    text: str | None
-    from_: MessageFrom = field(metadata={'data_key': 'from'})
+    text: str
+    from_: MessageFrom = field(metadata={"data_key": "from"})
     chat: Chat
 
     class Meta:
-        unknown = EXCLUDE
+        unknown = marshmallow.EXCLUDE
 
 
 @dataclass
@@ -48,7 +45,7 @@ class SendMessageResponse:
     result: Message
 
     class Meta:
-        unknown = EXCLUDE
+        unknown = marshmallow.EXCLUDE
 
 
 @dataclass
@@ -57,7 +54,7 @@ class UpdateObj:
     message: Message
 
     class Meta:
-        unknown = EXCLUDE
+        unknown = marshmallow.EXCLUDE
 
 
 @dataclass
@@ -66,7 +63,7 @@ class GetUpdatesResponse:
     result: List[UpdateObj]
 
     class Meta:
-        unknown = EXCLUDE
+        unknown = marshmallow.EXCLUDE
 
 
 get_updates_schema = marshmallow_dataclass.class_schema(GetUpdatesResponse)
