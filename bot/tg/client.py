@@ -26,7 +26,7 @@ class TgClient:
         result = get_updates_schema().load(json_data)
         return result
 
-    def send_message(self, chat_id: int, text: '') -> SendMessageResponse:
+    def send_message(self, chat_id: int, text: str) -> SendMessageResponse:
         """
             Отправление сообщения пользователю от бота.
         """

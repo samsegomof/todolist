@@ -154,6 +154,12 @@ class TgBot:
         """
         Запуск бота
         """
+        # self.offset = 0
+        # while True:
+        #     response = self.tg_client.get_updates(offset=self.offset)
+        #     for item in response.result:
+        #         self.offset = item.update_id + 1
+        #
         while True:
             response = self.tg_client.get_updates(offset=self.offset)
             for item in response.result:
